@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gujarati Trader</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
 <!-- META PIXEL -->
@@ -30,61 +31,76 @@ fbq('track','PageView');
 
 body{
 font-family:Poppins;
-background:#000;
+background:linear-gradient(135deg,#0a0a0a,#0f172a);
 color:#fff;
 text-align:center;
 margin:0;
+overflow-x:hidden;
 }
 
-/* HERO */
-
 .hero{
-padding:40px 20px;
+padding:50px 20px;
 }
 
 .hero img{
-width:120px;
-height:120px;
+width:130px;
+height:130px;
 border-radius:50%;
-box-shadow:0 0 25px #00c6ff;
+box-shadow:0 0 40px rgba(0,198,255,0.8);
 margin-bottom:15px;
 }
 
 .name{
-font-size:26px;
+font-size:28px;
 font-weight:700;
-margin-bottom:15px;
+margin-bottom:10px;
+background:linear-gradient(90deg,#00c6ff,#ff00cc);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+h2{
+font-weight:600;
+margin:10px 0;
+}
+
+p{
+color:#cbd5e1;
 }
 
 .cta{
 display:block;
 width:90%;
-max-width:340px;
+max-width:360px;
 margin:20px auto;
 padding:16px;
-border-radius:40px;
+border-radius:50px;
 font-size:18px;
 font-weight:bold;
 background:linear-gradient(90deg,#ff0080,#00c6ff);
 color:#fff;
 text-decoration:none;
+box-shadow:0 10px 30px rgba(0,0,0,0.5);
+transition:0.3s;
 }
 
-/* TRUST */
+.cta:hover{
+transform:scale(1.05);
+}
 
 .box{
-background:#0f1629;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
 margin:20px;
 padding:20px;
 border-radius:20px;
+border:1px solid rgba(255,255,255,0.1);
 }
 
 .point{
 margin:12px 0;
 font-size:15px;
 }
-
-/* URGENCY */
 
 .counter{
 color:#00ffcc;
@@ -98,7 +114,16 @@ bottom:15px;
 left:50%;
 transform:translateX(-50%);
 width:90%;
-max-width:340px;
+max-width:360px;
+}
+
+.badge{
+display:inline-block;
+padding:6px 14px;
+border-radius:20px;
+background:#00c6ff;
+font-size:12px;
+margin-bottom:10px;
 }
 
 </style>
@@ -107,6 +132,8 @@ max-width:340px;
 <body>
 
 <div class="hero">
+
+<div class="badge">🔥 LIMITED ACCESS</div>
 
 <img src="https://uploads.onecompiler.io/446vwj75z/448zrd6vz/WhatsApp%20Image%202025-12-29%20at%2018.24.42.jpeg">
 
@@ -118,7 +145,7 @@ max-width:340px;
 
 <a class="cta joinBtn">🚀 JOIN TELEGRAM FREE</a>
 
-<div class="counter">⚡ 4378 Traders Already Joined Today</div>
+<div class="counter">⚡ 4378 Traders Joined Today</div>
 
 </div>
 
@@ -137,15 +164,28 @@ max-width:340px;
 
 const telegram="https://t.me/+8u8p66LeJVJhMzg1";
 
-document.querySelectorAll(".joinBtn").forEach(btn=>{
+function fireOnce(eventName){
 
-btn.addEventListener("click",function(){
+if(!localStorage.getItem(eventName)){
 
-fbq('track','Lead');
+fbq('track',eventName);
 
 fbq('trackCustom','TelegramJoin',{
 source:'Landing Page'
 });
+
+localStorage.setItem(eventName,'true');
+
+}
+
+}
+
+
+document.querySelectorAll(".joinBtn").forEach(btn=>{
+
+btn.addEventListener("click",function(){
+
+fireOnce('Lead');
 
 setTimeout(function(){
 window.location.href=telegram;
